@@ -317,3 +317,5 @@ if [[ ! -f "Procfile" ]]; then
     echo "web: $bindir/heroku-$engine-apache2" > Procfile
     notice_inline "No Procfile, defaulting to 'web: $bindir/heroku-$engine-apache2'"
 fi
+
+ls
