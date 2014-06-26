@@ -318,4 +318,4 @@ if [[ ! -f "Procfile" ]]; then
     notice_inline "No Procfile, defaulting to 'web: $bindir/heroku-$engine-apache2'"
 fi
 
-ls
+php minification/minify.php
