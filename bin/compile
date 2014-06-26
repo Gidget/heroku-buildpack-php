@@ -319,5 +319,5 @@ if [[ ! -f "Procfile" ]]; then
 fi
 
 cd minification
-php minification/minify.php
+php minify.php
 cd ..
