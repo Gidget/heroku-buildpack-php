@@ -322,7 +322,6 @@ status "Minifying code..."
 cd minification
 php minify.php
 cd ..
-rootdir=$PWD
 
 status "Loading database..."
 cd $ENV_DIR
@@ -330,6 +329,7 @@ cd $ENV_DIR
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
 cd $BUILD_DIR
-cd lib/db/default_tables/mysql2postgres
-/etc/init.d/psql ${array[3]} < gidget.dump
-cd $rootdir
+cd /
+ls
+psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
+cd $BUILD_DIR
