@@ -324,7 +324,7 @@ php minify.php
 cd ..
 
 status "Loading database..."
-cd ENV_DIR
+cd $ENV_DIR
 dburl = testvar = $(cat DATABASE_URL)
 IFS = '/' read -a array <<< "$dburl"
 echo "${array[3]}"
