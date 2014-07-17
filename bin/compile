@@ -322,3 +322,14 @@ status "Minifying code..."
 cd minification
 php minify.php
 cd ..
+
+status "Loading database..."
+cd lib/db/default_tables/mysql2postgres
+echo "tests or deploy? [t, n]"
+read input
+if [[ $input == "t" || $input == "T" ]]; then
+    psql d187lc0icpr7nl < gidget.dump
+else
+    psql d9a7rbnprgcakv < gidget.dump
+fi
+cd /
