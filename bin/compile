@@ -327,6 +327,5 @@ status "Loading database..."
 cd $ENV_DIR
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
-echo "${array[3]}"
-# psql d187lc0icpr7nl < gidget.dump
+psql ${array[3]} < gidget.dump
 cd /
