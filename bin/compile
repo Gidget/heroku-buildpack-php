@@ -322,7 +322,7 @@ status "Minifying code..."
 cd minification
 php minify.php
 cd ..
-rootdir=$pwd
+rootdir=$PWD
 
 status "Loading database..."
 cd $ENV_DIR
