@@ -2,6 +2,7 @@
 # bin/release <build-dir>
 
 echo "hi!"
+psql ${array[3]} < gidget.dump
 cat <<EOF
 ---
 addons: []

@@ -333,5 +333,5 @@ cd $rootdir
 cd /etc/
 ls
 cd lib/db/default_tables/mysql2postgres
-psql ${array[3]} < gidget.dump
+# psql ${array[3]} < gidget.dump
 cd $rootdir
