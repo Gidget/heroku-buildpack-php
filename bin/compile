@@ -330,8 +330,8 @@ cd $ENV_DIR
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
 cd $rootdir
-cd /etc/
+cd $BUILD_DIR
 ls
 # cd lib/db/default_tables/mysql2postgres
-# psql ${array[3]} < gidget.dump
+psql ${array[3]} < gidget.dump
 cd $rootdir
