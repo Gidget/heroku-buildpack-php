@@ -2,7 +2,13 @@
 # bin/release <build-dir>
 
 echo "hi!"
-psql ${array[3]} < gidget.dump
+rootdir=$PWD
+cd /etc/
+ls
+# cd lib/db/default_tables/mysql2postgres
+# psql ${array[3]} < gidget.dump
+cd $rootdir
+# psql ${array[3]} < gidget.dump
 cat <<EOF
 ---
 addons: []
