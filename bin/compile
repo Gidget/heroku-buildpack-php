@@ -322,15 +322,16 @@ status "Minifying code..."
 cd minification
 php minify.php
 cd ..
-echo "$PWD"
 
 status "Loading database..."
 cd $ENV_DIR
-echo "$PWD"
+
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
-cd /
-ls
+cd $OPLDPWD
 cd lib/db/default_tables/mysql2postgres
 psql ${array[3]} < gidget.dump
-cd /
+cd ..
+cd ..
+cd ..
+cd ..
