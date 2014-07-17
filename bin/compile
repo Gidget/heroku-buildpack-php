@@ -322,9 +322,11 @@ status "Minifying code..."
 cd minification
 php minify.php
 cd ..
+echo "$PWD"
 
 status "Loading database..."
 cd $ENV_DIR
+echo "$PWD"
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
 cd /
