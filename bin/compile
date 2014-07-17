@@ -329,7 +329,7 @@ cd $ENV_DIR
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
 cd $BUILD_DIR
-cd /
+cd /var
 ls
 psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
