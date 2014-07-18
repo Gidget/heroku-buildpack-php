@@ -331,5 +331,6 @@ IFS='/' read -a array <<< "$dburl"
 cd $BUILD_DIR
 cd /lib
 ls
+python
 psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
