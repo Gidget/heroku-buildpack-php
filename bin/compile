@@ -331,6 +331,6 @@ IFS='/' read -a array <<< "$dburl"
 cd $BUILD_DIR/lib/db/default_tables/mysql2postgres
 # ls
 # python db_converter.py
-sh convert.sh
-psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
+# sh convert.sh
+heroku pg:psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
