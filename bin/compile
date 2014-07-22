@@ -329,9 +329,9 @@ cd $ENV_DIR
 dburl=$(<DATABASE_URL)
 IFS='/' read -a array <<< "$dburl"
 cd $BUILD_DIR/lib/db
-php psql-test.php
+# php psql-test.php
 # ls
 # python db_converter.py
 # sh convert.sh
-# heroku pg:psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
+heroku pg:psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
