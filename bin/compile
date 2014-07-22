@@ -334,5 +334,5 @@ IFS='/' read -a array <<< "$dburl"
 # sh convert.sh
 cd /
 ls
-# psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
+psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
