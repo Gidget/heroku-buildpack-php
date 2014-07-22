@@ -333,5 +333,5 @@ cd $BUILD_DIR/lib/db
 # ls
 # python db_converter.py
 # sh convert.sh
-/etc/init.d/psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
+$HOME/vendor/postgresql/bin/psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
