@@ -332,7 +332,7 @@ IFS='/' read -a array <<< "$dburl"
 # ls
 # python db_converter.py
 # sh convert.sh
-cd $BUILD_DIR
+cd $HOME
 ls
 psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 cd $BUILD_DIR
