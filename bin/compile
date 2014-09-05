@@ -323,13 +323,13 @@ fi
 #php minify.php
 #cd ..
 
-status "Loading database..."
-cd $ENV_DIR
+#status "Loading database..."
+#cd $ENV_DIR
 
-dburl=$(<DATABASE_URL)
-IFS='/' read -a array <<< "$dburl"
-cd $BUILD_DIR/lib/db
-php psql-load-db.php
+#dburl=$(<DATABASE_URL)
+#IFS='/' read -a array <<< "$dburl"
+#cd $BUILD_DIR/lib/db
+#php psql-load-db.php
 # ls
 # python db_converter.py
 # sh convert.sh
