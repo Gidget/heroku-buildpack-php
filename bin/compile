@@ -88,6 +88,7 @@ HHVM_VERSIONS="3.1.0 3.0.1"
 HHVM_VERSIONS_ARR=($HHVM_VERSIONS)
 HHVM_VERSION=
 engine="php"
+engine_r="php -r"
 if [[ -f "composer.json" ]]; then
     if [[ ! -f "composer.lock" ]]; then
         has_packages=$(cat composer.json | python -c 'import sys, json; print any(key.count("/") for key in json.load(sys.stdin)["require"])' 2> /dev/null || true) # might fail, set -e would stop execution
