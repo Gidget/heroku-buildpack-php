@@ -226,7 +226,7 @@ else
 fi
 # echo composer version for info purposes
 # tail to get rid of outdated version warnings (Composer sends those to STDOUT instead of STDERR)
-composer --version 2> /dev/null | tail -n 1 | indent
+# composer --version 2> /dev/null | tail -n 1 | indent
 
 status "Handling authorization (OAuth) keys..."
 
