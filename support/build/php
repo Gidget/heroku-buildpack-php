@@ -13,7 +13,17 @@ DEFAULT_VERSION="5.5.11"
 dep_version=${VERSION:-$DEFAULT_VERSION}
 dep_dirname=php-${dep_version}
 dep_archive_name=${dep_dirname}.tar.gz
-dep_url=http://us1.php.net/get/${dep_archive_name}/from/www.php.net/mirror
+if [[ $dep_version == *alpha* ]] || [[ $dep_version == *beta* ]] || [[ $dep_version == *RC* ]]; then
+    if [[ $dep_version == 5.5.* ]]; then
+        dep_url=http://downloads.php.net/~jpauli/${dep_archive_name}
+    elif [[ $dep_version == 5.6.* ]]; then
+        dep_url=http://downloads.php.net/~tyrael/${dep_archive_name}
+    elif [[ $dep_version == 7.0.* ]]; then
+        dep_url=https://downloads.php.net/~ab/${dep_archive_name}
+    fi
+else
+    dep_url=http://us1.php.net/get/${dep_archive_name}/from/this/mirror
+fi
 
 echo "-----> Building PHP ${dep_version}..."
 
@@ -21,8 +31,23 @@ curl -L ${dep_url} | tar xz
 
 pushd ${dep_dirname}
 
-echo "-----> Applying https://github.com/php/php-src/pull/694..."
-curl -L https://github.com/php/php-src/pull/694.diff | patch -p1
+if echo -n $dep_version | python -c "import sys, pkg_resources; ver=pkg_resources.parse_version(sys.stdin.read()); sys.exit(ver >= pkg_resources.parse_version('5.6.0RC2') || ver >= pkg_resources.parse_version('5.5.17RC1'));"; then
+    echo "-----> Applying https://github.com/php/php-src/pull/694..."
+    curl -L https://github.com/php/php-src/pull/694.diff | patch -p1
+fi
+
+configureopts=
+if [[ $dep_version == 7.* ]]; then
+    configureopts="\
+--with-mcrypt=shared,${OUT_PREFIX} \
+--enable-opcache-file\
+"
+else
+    configureopts="\
+--with-mcrypt=${OUT_PREFIX} \
+--with-mysql=shared \
+"
+fi
 
 export PATH=${OUT_PREFIX}/bin:$PATH
 # cannot be built shared: date, ereg, opcache (always), pcre, reflection, sockets (?), spl, standard,
@@ -34,7 +59,6 @@ LD_LIBRARY_PATH=${OUT_PREFIX} ./configure \
     --enable-fpm \
     --with-bz2 \
     --with-curl \
-    --with-mcrypt=${OUT_PREFIX} \
     --with-pdo-mysql \
     --with-mysqli \
     --with-openssl \
@@ -46,7 +70,9 @@ LD_LIBRARY_PATH=${OUT_PREFIX} ./configure \
     --with-zlib \
     --with-zlib-dir=${OUT_PREFIX} \
     --enable-bcmath=shared \
+    --enable-calendar=shared \
     --enable-exif=shared \
+    --enable-ftp=shared \
     --with-gd=shared \
         --enable-gd-native-ttf \
         --with-freetype-dir=/usr \
@@ -55,14 +81,14 @@ LD_LIBRARY_PATH=${OUT_PREFIX} ./configure \
     --with-gettext=shared,${OUT_PREFIX} \
     --enable-intl=shared \
     --enable-mbstring=shared \
-    --with-mysql=shared \
     --enable-pcntl=shared \
     --enable-shmop=shared \
     --enable-soap=shared \
     --with-sqlite3=shared \
     --with-pdo-sqlite=shared \
     --with-xmlrpc=shared \
-    --with-xsl=shared
+    --with-xsl=shared \
+    $configureopts
 make -s -j 9
 make install -s
 popd
