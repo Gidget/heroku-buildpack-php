@@ -207,7 +207,7 @@ if [[ $engine == "php" ]]; then
     fi
 fi
 
-status "Installing dependencies..."
+status "Installing (composer) dependencies..."
 
 # check if we should use a composer.phar version bundled with the project
 if [[ -f "composer.phar" ]]; then
