@@ -434,4 +434,15 @@ cd ..
 # sh convert.sh
 # cd $HOME/vendor/postgresql/bin
 # psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
-cd $BUILD_DIR 
+
+if [ $(<RESET_DATABASE) == "true" ] || [ $(<RESET_DATABASE) == "TRUE" ]; then
+    status "Reseting and re-populating Postgres Database..."
+else status "Database will not be reset..."
+fi
+echo "Testing 1: "
+echo $(<RESET_DATABASE)
+echo "Testing 2: "
+echo $RESET_DATABASE
+
+
+cd $BUILD_DIR
