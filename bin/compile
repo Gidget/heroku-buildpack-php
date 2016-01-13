@@ -445,10 +445,10 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
         if [ "$isproduction" == "production" ] || [ "$isproduction" == "PRODUCTION" ]; then
            status "Database will not be reset: This is a PRODUCTION server."
         else 
-           status "Database will reset and re-populated: RESET_DATABASE set as 'true' & DEPLOYMENT != 'production'."
+           status "Database will be reset and re-populated: RESET_DATABASE set as 'true' & DEPLOYMENT != 'production'."
         fi
      else
-       status "Database will reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
+       status "Database will be reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
      fi
   else status "Database will not be reset: RESET_DATABASE set as 'false'."
   fi
