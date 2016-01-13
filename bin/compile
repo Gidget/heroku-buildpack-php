@@ -439,7 +439,7 @@ status "Loading database..."
 if [ -f $ENV_DIR/RESET_DATABASE ]; then
   resetDB=$(<$ENV_DIR/RESET_DATABASE)
   
-  if [ "$resetdb" == "true" ] || [ "$resetdb" == "TRUE" ]; then
+  if [ "$resetDB" == "true" ] || [ "$resetDB" == "TRUE" ]; then
      echo "Resetting and re-populating Postgres Database..."
   else echo "Database will not be reset (1)..."
   fi
