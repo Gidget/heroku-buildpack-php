@@ -455,6 +455,10 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
           if [ -f $ENV_DIR/DATABASE_URL ]; then
                 dburl=$(<$ENV_DIR/DATABASE_URL)
 				IFS='/' read -a array <<< "$dburl"
+				echo "dburl: "
+				echo $dburl
+				echo "array: "
+				echo ${array[3]}
 				psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/gidget.pgbackup
                 echo "       SUCCESS: pgbackup file exists and has been imported."
           else
