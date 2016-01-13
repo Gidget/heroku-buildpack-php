@@ -454,7 +454,21 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
           # Check to see if database exists
           if [ -f $ENV_DIR/DATABASE_URL ]; then
                 dburl=$(<$ENV_DIR/DATABASE_URL)
-				pg_restore -O -C -d $dburl $BUILD_DIR/lib/db/default_tables/gidget.pgbackup
+				IFS='/' read -a array <<< "$dburl"
+				echo "0: "
+				echo ${array[0]}
+				echo "1: "
+				echo ${array[1]}
+				echo "2: "
+				echo ${array[2]}
+				echo "3: "
+				echo ${array[3]}
+				echo "4: "
+				echo ${array[4]}
+				echo "5: "
+				echo ${array[5]}
+				
+				#pg_restore -Fc -O -C -w -h ${array[x]} -U ${array[x]} -d ${array[3]} $BUILD_DIR/lib/db/default_tables/gidget.pgbackup
                 echo "       SUCCESS: pgbackup file exists and has been imported."
           else
              echo "       FAILURE: Cannot find DATABASE_URL variable; is Postgres installed? Database not updated."
