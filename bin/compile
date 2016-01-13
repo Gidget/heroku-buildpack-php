@@ -440,11 +440,18 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
   resetDB=$(<$ENV_DIR/RESET_DATABASE)
   
   if [ "$resetDB" == "true" ] || [ "$resetDB" == "TRUE" ]; then
-     echo "Resetting and re-populating Postgres Database..."
-  else echo "Database will not be reset (1)..."
+     if [ -f $ENV_DIR/DEPLOYMENT ]; then
+        isproduction=$(<$ENV_DIR/DEPLOYMENT)
+        if [ "$isproduction" == "production" ] || [ "$isproduction" == "PRODUCTION" ]; then
+           status ""Database will not be reset: This is a PRODUCTION server."
+        else 
+           status "Database will reset and re-populated: RESET_DATABASE set as 'true'"
+        fi 
+     fi
+  else status ""Database will not be reset: RESET_DATABASE set as 'false'."
   fi
 else
-  echo "Database will not be reset (2)..."
+  status "Database will not be reset: Missing RESET_DATABASE Variable."
 fi
 
 
