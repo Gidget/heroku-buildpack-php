@@ -449,6 +449,12 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
         fi
      else
        echo "       Database will be reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
+       # check if database dump exists
+       if [ -f $BUILD_DIR/lib/db/default_tables/gidget.pgbackup ]; then
+          echo "       SUCCESS: pgbackup file exists."
+       else
+          echo "       FAILURE: lib/db/default_tables/gidget.pgbackup file doesn't exist. Database not updated."
+       fi
      fi
   else echo "       Database will not be reset: RESET_DATABASE set as 'false'."
   fi
