@@ -450,16 +450,12 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
      else
        echo "       Database will be reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
        # check if database dump exists
-       if [ -f $BUILD_DIR/lib/db/default_tables/gidget.pgbackup ]; then
+       if [ -f $BUILD_DIR/lib/db/default_tables/gidget.psql ]; then
           # Check to see if database exists
           if [ -f $ENV_DIR/DATABASE_URL ]; then
                 dburl=$(<$ENV_DIR/DATABASE_URL)
 				IFS='/' read -a array <<< "$dburl"
-				echo "dburl: "
-				echo $dburl
-				echo "array: "
-				echo ${array[3]}
-				psql $dburl < $BUILD_DIR/lib/db/default_tables/gidget.pgbackup
+				psql $dburl < $BUILD_DIR/lib/db/default_tables/gidget.psql
                 echo "       SUCCESS: pgbackup file exists and has been imported."
           else
              echo "       FAILURE: Cannot find DATABASE_URL variable; is Postgres installed? Database not updated."
