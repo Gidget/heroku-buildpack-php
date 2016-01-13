@@ -443,17 +443,17 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
      if [ -f $ENV_DIR/DEPLOYMENT ]; then
         isproduction=$(<$ENV_DIR/DEPLOYMENT)
         if [ "$isproduction" == "production" ] || [ "$isproduction" == "PRODUCTION" ]; then
-           status "Database will not be reset: This is a PRODUCTION server."
+           echo "       Database will not be reset: This is a PRODUCTION server."
         else 
-           status "Database will be reset and re-populated: RESET_DATABASE set as 'true' & DEPLOYMENT != 'production'."
+           echo "       Database will be reset and re-populated: RESET_DATABASE set as 'true' & DEPLOYMENT != 'production'."
         fi
      else
-       status "Database will be reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
+       echo "       Database will be reset and re-populated: RESET_DATABASE == 'true' & DEPLOYMENT == undefined."
      fi
-  else status "Database will not be reset: RESET_DATABASE set as 'false'."
+  else echo "       Database will not be reset: RESET_DATABASE set as 'false'."
   fi
 else
-  status "Database will not be reset: Missing RESET_DATABASE Variable."
+  echo "       Database will not be reset: Missing RESET_DATABASE Variable."
 fi
 
 
