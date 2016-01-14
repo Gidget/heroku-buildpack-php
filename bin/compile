@@ -433,6 +433,8 @@ cd ..
 # cd $HOME/vendor/postgresql/bin
 # psql ${array[3]} < $BUILD_DIR/lib/db/default_tables/mysql2postgres/gidget.dump
 
+# Comment out the all the following lines
+: <<'END'
 status "Loading database..."
 if [ -f $ENV_DIR/RESET_DATABASE ]; then
   resetDB=$(<$ENV_DIR/RESET_DATABASE)
@@ -469,6 +471,7 @@ if [ -f $ENV_DIR/RESET_DATABASE ]; then
 else
   echo "       Database will not be reset: Missing RESET_DATABASE Variable."
 fi
-
+END
+# End comments
 
 cd $BUILD_DIR
